@@ -2,9 +2,9 @@ from dataclasses import dataclass
 
 from pydantic import BaseModel, Field
 
-from lib.document_loader import load_file_as_document
-from lib.documents_chunker import get_chunks_from_documents
-from lib.workflow import run_agentic_rag
+from app.lib.document_loader import load_file_as_document
+from app.lib.documents_chunker import get_chunks_from_documents
+from app.lib.workflow import run_agentic_rag
 
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain.chat_models import init_chat_model
@@ -22,17 +22,17 @@ class Reflection(BaseModel):
         description="Brief explanation for the confidence score."
     )
 
-def loop_over_claim_chunks():
+def loop_over_claim_chunks(claim_file_path: str, policy_file_path: str):
     non_compliant_claims: list[AdjunctatorResult] = []
 
-    documents = [load_file_as_document("test/insurance_claim.txt")]
+    documents = [load_file_as_document(claim_file_path)]
     chunks = get_chunks_from_documents(documents)
 
     
 
     compliance = True
     for chunk in chunks:
-        analysis = run_agentic_rag(chunk.page_content)
+        analysis = run_agentic_rag(chunk.page_content, policy_file_path)
         if analysis.compliance_score == 'no':
             non_compliant_claims.append(
                 AdjunctatorResult(
@@ -58,8 +58,8 @@ reflector_model = init_chat_model(
 )
 
 
-def reflect_and_give_final_answer():
-    results = loop_over_claim_chunks()
+def reflect_and_give_final_answer(claim_file_path: str,  policy_file_path: str):
+    results = loop_over_claim_chunks(claim_file_path, policy_file_path)
     if len(results) == 0:
         print("The claim is compliant.")
         return

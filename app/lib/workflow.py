@@ -3,9 +3,9 @@ from typing import Literal, Optional
 from langgraph.graph import START, END, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
-from lib.answer_producer import ScoreAndCitation, produce_final_answer
-from lib.query_responder import respond_or_call_policy_retriever
-from lib.tools.retrieval import retriever_tool
+from app.lib.graph.answer_producer import ScoreAndCitation, produce_final_answer
+from app.lib.graph.query_responder import respond_or_call_policy_retriever
+from app.lib.tools.retrieval import retriever_tool
 
 class InsuranceState(MessagesState):
     analysis: Optional[ScoreAndCitation]
