@@ -15,6 +15,7 @@ def make_retriever_tool(retriever: Retriever) -> Callable[..., object]:
         chunks = get_chunks_from_documents(documents)
         retriever = Retriever(chunks)
         retrieved_docs = retriever.retriever.invoke(query)
+        print("Invoked once")
         return "\n\n".join([doc.page_content for doc in retrieved_docs])
     
     return retriever_tool

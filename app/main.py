@@ -19,7 +19,7 @@
 #     main()
 
 from fastapi import FastAPI
-from app.routers.chatbot import chatbot_router
+from app.routers.agent import agent_router
 
 app = FastAPI()
 
@@ -28,4 +28,4 @@ app = FastAPI()
 def root():
     return {"message": "Hello"}
 
-app.include_router(chatbot_router)
+app.include_router(agent_router)

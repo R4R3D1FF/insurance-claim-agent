@@ -9,15 +9,15 @@ from app.services.agent_service import AgentService
 from app.services.file_service import FileService
 from app.services.policy_checker import PolicyChecker, Reflection
 
-chatbot_router = APIRouter(prefix="/chatbot", tags=["Chatbot"])
+agent_router = APIRouter(prefix="/agent", tags=["Agent"])
 
 class MessageRequest(BaseModel):
-    claim_id: str
+    claim_id: int
 
 MessageResponse = Reflection
 
-@chatbot_router.post(
-    "/{agent_id}/message/",
+@agent_router.post(
+    "/{agent_id}/message",
     response_model = MessageResponse,
 )
 def check_claim_validity(
@@ -29,7 +29,7 @@ def check_claim_validity(
     id = message_request.claim_id
     claim_file_path = file_service.get_path(id)
     
-    rule_policy_path = agent_service.get_policy_path()
+    rule_policy_path = agent_service.get_policy_path(agent_id)
     
     policy_checker = PolicyChecker(rule_policy_path)
     

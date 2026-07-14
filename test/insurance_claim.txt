@@ -1,0 +1,43 @@
+Here's a realistic claim that violates multiple rules in the sample policy, making it useful for testing your RAG pipeline.
+
+Insurance Claim Form
+
+Claim Number: CLM-2026-1045
+
+Policy Number: AUTO-2026-001
+
+Claimant: John Carter
+
+Date of Accident: March 12, 2026
+
+Date Reported: April 28, 2026
+
+Accident Description
+
+At approximately 11:45 PM on March 12, 2026, I was driving my 2022 Toyota Camry on Highway 47 when I lost control while racing another vehicle. My vehicle struck a concrete barrier, causing extensive damage to the front bumper, hood, and left suspension.
+
+I would like to claim reimbursement for the repairs under my collision coverage.
+
+Driver Information
+Driver: John Carter
+Valid Driver's License: Yes
+Police Report
+
+No police report was filed because both vehicles left the scene and I did not believe it was necessary.
+
+Repair Estimate
+
+Estimated repair cost: $8,450
+
+Repair shop: Metro Collision Center
+
+Additional Statement
+
+I acknowledge that I participated in a local street racing event immediately before the accident occurred.
+
+Documents Attached
+Vehicle photographs
+Repair estimate
+Claim form
+
+No police report attached.

@@ -8,7 +8,7 @@ class AgentRepository:
         self.db = db
 
     def get(self, agent_id: int) -> Agent:
-        self.db.get(Agent, agent_id)
+        return self.db.get(Agent, agent_id)
 
     def create(self):
         agent = Agent()

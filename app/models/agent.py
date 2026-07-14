@@ -1,8 +1,8 @@
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-class Base(DeclarativeBase):
-    pass
+from app.models.base import Base
+from app.models.file import File
 
 class Agent(Base):
     __tablename__ = "agents"
@@ -13,3 +13,5 @@ class Agent(Base):
         ForeignKey("files.id"),
         nullable=False
     )
+
+    policy_file: Mapped[File] = relationship()

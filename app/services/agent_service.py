@@ -6,6 +6,7 @@ class AgentService:
         self.repository = repository
 
     def get_policy_path(self, agent_id: int) -> str:
+        print("agent_id", agent_id)
         agent = self.repository.get(agent_id)
 
         if agent is None:

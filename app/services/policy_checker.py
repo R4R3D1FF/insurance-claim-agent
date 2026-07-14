@@ -1,6 +1,7 @@
+from dataclasses import dataclass
+
 from pydantic import BaseModel, Field
 
-from app.lib.claim_loop import AdjunctatorResult
 from app.lib.document_loader import load_file_as_document
 from app.lib.documents_chunker import get_chunks_from_documents
 from app.lib.graph.tools import make_retriever_tool
@@ -8,6 +9,12 @@ from app.lib.graph.workflow import create_graph
 from app.lib.retriever import Retriever
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage, SystemMessage
+
+@dataclass
+class AdjunctatorResult:
+    chunk: str
+    citation: str
+
 
 class Reflection(BaseModel):
     compliant: bool = Field(

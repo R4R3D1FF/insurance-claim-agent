@@ -3,7 +3,7 @@ from typing import Literal, Optional
 from langgraph.graph import END, START, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
-from app.lib.graph.nodes import ScoreAndCitation, produce_final_answer, respond_or_call_policy_retriever
+from app.lib.graph.nodes import ScoreAndCitation, produce_final_answer, make_respond_or_call_policy_retriever
 
 class InsuranceState(MessagesState):
     analysis: Optional[ScoreAndCitation]
@@ -11,7 +11,7 @@ class InsuranceState(MessagesState):
 def create_graph(retriever_tool):
     workflow = StateGraph(InsuranceState)
 
-    workflow.add_node(respond_or_call_policy_retriever)
+    workflow.add_node(make_respond_or_call_policy_retriever(retriever_tool))
     workflow.add_node("retrieve", ToolNode([retriever_tool]))
     workflow.add_node(produce_final_answer)
 
