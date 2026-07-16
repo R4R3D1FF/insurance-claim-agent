@@ -1,7 +1,7 @@
 import os
 from fastapi import HTTPException
 from jose import JWTError
-import jwt
+from jose import jwt
 
 def verify_and_extract_payload_from_jwt(token: str) -> dict:
     try:

@@ -11,12 +11,15 @@ def get_current_user(
     access_token: str | None = Cookie(default=None),
     db: Session = Depends(get_db)
 ):
+    print("access_token", access_token)
     if access_token is None:
         return None
     
     payload = verify_and_extract_payload_from_jwt(access_token)
 
     user_id = payload["sub"]
+
+    print("user_id", user_id)
     
     row = (
         db.execute(
@@ -28,6 +31,6 @@ def get_current_user(
     )
 
     if row is None:
-        raise HTTPException(status_code=401)
+        return None
 
     return row

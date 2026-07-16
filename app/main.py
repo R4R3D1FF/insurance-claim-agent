@@ -20,6 +20,8 @@
 
 from fastapi import FastAPI
 from app.routers.agent import agent_router
+from app.routers.auth import auth_router
+import app.models
 
 app = FastAPI()
 
@@ -29,3 +31,4 @@ def root():
     return {"message": "Hello"}
 
 app.include_router(agent_router)
+app.include_router(auth_router)

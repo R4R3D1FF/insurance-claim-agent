@@ -1,8 +1,13 @@
+from typing import TYPE_CHECKING
+
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import Base
 from app.models.file import File
+
+if TYPE_CHECKING:
+    from app.models.user_agent_access import UserAgentAccess
 
 class Agent(Base):
     __tablename__ = "agents"
@@ -15,3 +20,5 @@ class Agent(Base):
     )
 
     policy_file: Mapped[File] = relationship()
+
+    accesses: Mapped["UserAgentAccess"] = relationship(back_populates="agent")

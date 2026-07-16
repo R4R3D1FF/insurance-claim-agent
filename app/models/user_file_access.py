@@ -1,10 +1,13 @@
+from typing import TYPE_CHECKING
+
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import Base
-from app.models.file import File
-from app.models.user import User
 
+if TYPE_CHECKING:
+    from app.models.user import User
+    from app.models.file import File
 
 class UserFileAccess(Base):
     __tablename__ = "user_file_access"
@@ -19,5 +22,5 @@ class UserFileAccess(Base):
         primary_key=True,
     )
 
-    user: Mapped[User] = relationship(back_populates="file_accesses")
-    file: Mapped[File] = relationship(back_populates="accesses")
+    user: Mapped["User"] = relationship(back_populates="file_access")
+    file: Mapped["File"] = relationship(back_populates="accesses")

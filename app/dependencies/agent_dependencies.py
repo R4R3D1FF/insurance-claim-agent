@@ -1,7 +1,7 @@
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from app.database import get_db
+from app.dependencies.database_dependencies import get_db
 from app.repositories.agent_repository import AgentRepository
 from app.services.agent_service import AgentService
 

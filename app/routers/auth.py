@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta, timezone
+import os
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
-import jwt
+from jose import jwt
 from pwdlib import PasswordHash
 from pydantic import BaseModel
 from sqlalchemy import select
@@ -11,9 +12,6 @@ from app.dependencies.database_dependencies import get_db
 from app.models.user import User
 
 
-SECRET_KEY = "your-secret-key"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 
 def create_access_token(
@@ -25,15 +23,15 @@ def create_access_token(
     expire = datetime.now(timezone.utc) + (
         expires_delta
         if expires_delta is not None
-        else timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        else timedelta(minutes=60)
     )
 
     to_encode.update({"exp": expire})
 
     return jwt.encode(
         to_encode,
-        SECRET_KEY,
-        algorithm=ALGORITHM,
+        os.getenv("SECRET_KEY"),
+        algorithm="HS256",
     )
 
 auth_router = APIRouter(prefix="/auth", tags=["Authentication"])
